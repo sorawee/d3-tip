@@ -22,7 +22,7 @@
   // Public - contructs a new tooltip
   //
   // Returns a tip
-  return function() {
+  return function(detached) {
     var direction = d3_tip_direction,
         offset    = d3_tip_offset,
         html      = d3_tip_html,
@@ -34,7 +34,7 @@
     function tip(vis) {
       svg = getSVGNode(vis)
       point = svg.createSVGPoint()
-      document.body.appendChild(node)
+      detached.node().appendChild(node);
     }
 
     // Public - show the tooltip on the screen
@@ -56,11 +56,12 @@
       nodel.html(content)
         .style({ opacity: 1, 'pointer-events': 'all' })
 
+      var clientRect = detached.node().getBoundingClientRect();
       while(i--) nodel.classed(directions[i], false)
       coords = direction_callbacks.get(dir).apply(this)
       nodel.classed(dir, true).style({
-        top: (coords.top +  poffset[0]) + scrollTop + 'px',
-        left: (coords.left + poffset[1]) + scrollLeft + 'px'
+        top: (coords.top +  poffset[0] - clientRect.top) + scrollTop + 'px',
+        left: (coords.left + poffset[1] - clientRect.left) + scrollLeft + 'px'
       })
 
       return tip
