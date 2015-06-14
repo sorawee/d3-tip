@@ -6,7 +6,7 @@
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module with d3 as a dependency.
-    define(['d3'], factory)
+    define([], factory)
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS
     module.exports = function(d3) {
@@ -22,7 +22,7 @@
   // Public - contructs a new tooltip
   //
   // Returns a tip
-  return function(detached) {
+  return function(d3, detached) {
     var direction = d3_tip_direction,
         offset    = d3_tip_offset,
         html      = d3_tip_html,
