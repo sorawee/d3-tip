@@ -22,7 +22,8 @@
   // Public - contructs a new tooltip
   //
   // Returns a tip
-  return function(d3, detached) {
+  return function(d3) {
+  return function(detached) {
     var direction = d3_tip_direction,
         offset    = d3_tip_offset,
         html      = d3_tip_html,
@@ -320,6 +321,7 @@
     }
 
     return tip
+  }
   };
 
 }));
